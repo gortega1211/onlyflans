@@ -10,16 +10,19 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
+        - APP_FOLDER=${APP_FOLDER}
         - PROJECT_FOLDER=${DJANGO_FOLDER}
     ports:
       - "8000:8000"
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    environment:
-      - HOST=host.docker.internal
-      - PORT=5432
-      - USER=ub-django
-      - PASSWORD=ub-django
+    volumes:
+      - ${VOLUME_FOLDER}:${APP_FOLDER}/${DJANGO_FOLDER}
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    # environment:
+    #   - HOST=host.docker.internal
+    #   - PORT=5432
+    #   - USER=ub-django
+    #   - PASSWORD=ub-django
     mem_limit: "4g"
     mem_reservation: "2g"
     cpus: "1"

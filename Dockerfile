@@ -3,13 +3,12 @@ FROM python:3.10.10-slim
 
 
 # Set up environment variable for the application directory
-ENV APP_HOME=/app
+ARG APP_FOLDER
 ARG PROJECT_FOLDER
-ENV PROJECT=$PROJECT_FOLDER
 
 # Create the application directory
-RUN mkdir -p $APP_HOME
-WORKDIR $APP_HOME
+RUN mkdir -p $APP_FOLDER/$PROJECT_FOLDER
+WORKDIR $APP_FOLDER
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -25,9 +24,6 @@ COPY requirements.txt .
 # Install dependencies
 RUN pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire local project into the container
-COPY . .
 
 EXPOSE 8000
 
