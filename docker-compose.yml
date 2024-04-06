@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  django:
+    container_name: ${DJANGO_CONT_NAME}
+    env_file:
+      - path: ./.env
+        required: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PROJECT_FOLDER=${DJANGO_FOLDER}
+    ports:
+      - "8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      - HOST=host.docker.internal
+      - PORT=5432
+      - USER=ub-django
+      - PASSWORD=ub-django
+    mem_limit: "4g"
+    mem_reservation: "2g"
+    cpus: "1"
+    cpuset: "2"
+    command: >
+      sh -c "python3 manage.py makemigrations && 
+             python3 manage.py migrate && 
+             python3 manage.py runserver 0.0.0.0:8000"
