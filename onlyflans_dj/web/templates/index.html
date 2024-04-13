@@ -6,16 +6,27 @@
 {% endblock %}
 
 {% block main %}
-    <section>
+    <section class="container">
         <h2>Products</h2>
         <div>
-            <ul>
-                {% for p in products %}
-                    <li>
-                        <i>{{ p.id }}</i> | <strong>{{ p.name }}</strong>: {{ p.price }}
-                    </li>
-                {% endfor %}
-            </ul>
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in products %}
+                    <tr>
+                        <th scope="row">{{ p.id }}</th>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </section>
 
