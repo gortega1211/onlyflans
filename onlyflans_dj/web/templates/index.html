@@ -12,7 +12,7 @@
             <ul>
                 {% for p in products %}
                     <li>
-                        <strong>{{ p.name }}</strong>: {{ p.price }}
+                        <i>{{ p.id }}</i> | <strong>{{ p.name }}</strong>: {{ p.price }}
                     </li>
                 {% endfor %}
             </ul>

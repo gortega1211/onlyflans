@@ -3,10 +3,10 @@ from django.shortcuts import render
 from django.template import loader
 
 PRODUCTS = [
-    {"name": "Product1", "price": 10.5},
-    {"name": "Product2", "price": 8.5},
-    {"name": "Product3", "price": 5.0},
-    {"name": "Product4", "price": 4.5}
+    {"id": 1, "name": "Product1", "price": 10.5},
+    {"id": 2, "name": "Product2", "price": 8.5},
+    {"id": 3, "name": "Product3", "price": 5.0},
+    {"id": 4, "name": "Product4", "price": 4.5}
 ]
 
 def index(request):
