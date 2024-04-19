@@ -1,22 +1,32 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import loader
 
-PRODUCTS = [
-    {"id": 1, "name": "Product1", "price": 10.5, "picture": "https://picsum.photos/seed/picsum/200/300", "description": "Product's description 1"},
-    {"id": 2, "name": "Product2", "price": 8.5, "picture": "https://picsum.photos/id/237/200/300", "description": "Product's description 2"},
-    {"id": 3, "name": "Product3", "price": 5.0, "picture": "https://picsum.photos/200/300?grayscale", "description": "Product's description 3"},
-    {"id": 4, "name": "Product4", "price": 4.5, "picture": "https://picsum.photos/200/300/?blur", "description": "Product's description 4"}
-]
+from .models import Flan, ContactForm
+from .forms import ContactFormForm
 
 def index(request):
-    return render(request, "index.html", {"products": PRODUCTS})
+    flans = Flan.objects.all()
+    return render(request, "index.html", {"flans": flans})
 
 def about(request):
     template = loader.get_template("about.html")
     return HttpResponse(template.render())
 
 def welcome(request):
-    client_name = f", {request.GET.get('clientName')}" if request.GET.get("clientName") else ", Dear client"
     template = loader.get_template("welcome.html")
-    return HttpResponse(template.render({"client_name": client_name}))
+    return HttpResponse(template.render())
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactFormForm(request.POST)
+        if form.is_valid():
+            contact_form = ContactForm.objects.create(**form.cleaned_data)
+            return HttpResponseRedirect("/success")
+    else:
+        form = ContactFormForm
+    return render(request, "contact.html", {"form": form})
+
+def success(request):
+    print(request)
+    return render(request, "success.html", {})

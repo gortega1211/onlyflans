@@ -7,37 +7,19 @@
 
 {% block main %}
     <section class="container">
-        <h2>Products</h2>
-        <div>
-            <table class="table text-center">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for p in products %}
-                    <tr>
-                        <th scope="row">{{ p.id }}</th>
-                        <td>{{ p.name }}</td>
-                        <td>{{ p.price }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+        <h2>Flans</h2>
+        <div class="row">
+            {% for f in flans %}
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ f.image_url }}" class="card-img-top" alt="{{ f.name }}">
+                    <div class="card-body">
+                    <h5 class="card-title">{{ f.name }}</h5>
+                    <p class="card-text">{{ f.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </section>
-
-    <div class="container">
-        <form action="/welcome" method="GET">
-            <div class="mb-3">
-            <label for="clientName" class="form-label">Name</label>
-            <input type="text" name="clientName" class="form-control" id="clientName" aria-describedby="clientNameHelp">
-            <div id="clientNameHelp" class="form-text">Introduce your name.</div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
 {% endblock %}
