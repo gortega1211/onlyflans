@@ -20,13 +20,13 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('helloWorld/', views.hello_world, name="helloWorld"),
-    # path('byeWorld/', views.bye_world, name="byeWorld"),
-    # path('', views.hi),
-    # path('dynamicContent/<str:name>', views.dynamic_content),
-    # path('home/', views.home),
-    # path('about/', views.about),
-    # path('contact/', views.contact),
+    path('helloWorld/', views.hello_world, name="helloWorld"),
+    path('byeWorld/', views.bye_world, name="byeWorld"),
+    path('', views.hi),
+    path('dynamicContent/', views.dynamic_content),
+    path('home/', views.home),
+    path('about/', views.about),
+    path('contact/', views.contact),
     path('blog/', include("blog.urls")),
     path('foro/', include("foro.urls")),
 ]

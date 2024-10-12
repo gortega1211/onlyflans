@@ -10,8 +10,9 @@ def bye_world(request) -> HttpResponse:
 def hi(request):
     return render(request, "hi.html", {})
 
-def dynamic_content(request, name):
-    context = {"name": name}
+def dynamic_content(request):
+    categories = ["Python", "Django", "HTML", "CSS", "JavaScript"]
+    context = {"categories": categories}
     return render(request, 'dynamicContent.html', context)
 
 def home(request):
